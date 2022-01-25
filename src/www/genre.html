@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/book.css">
+
+    <title>Libros</title>
+
+</head>
+
+
+<body>
+    <div class="row p-5 justify-content-center">
+        <h1>Biblioteca</h1>
+    </div>
+    <div class="row p-5 justify-content-center">
+        <div class="col-3 "><a href="http://127.0.0.1:3000/books" class="page-link">Libros</a></div>
+        <div class="col-3"><a href="http://127.0.0.1:3000/genres" class="page-link">Generos</a></div>
+        <div class="col-3 "><a href="http://127.0.0.1:3000/users" class="page-link">Usuarios</a></div>
+        <div class="col-3 "><a href="http://127.0.0.1:3000/borrow" class="page-link">Prestamo</a></div>
+    </div>
+    <div id="app" class="container container-fluid ">
+        <div class="row ">
+            <div class="col-md-3 ">
+                <h3>Libros</h3>
+                <div class="card card-body ">
+                    <form ref="genreForm" v-on:submit="processgenre($event)" class="border-dark">
+                        <div class="form-group">
+                            <input v-model="genre.id" ref="id" type="text" class="form-control" placeholder="id" minglength="2" maxlength="2">
+                        </div>
+                        <div class="form-group">
+                            <input v-model="genre.desc" ref="desc" type="text" class="form-control" placeholder="Descripción" minglength="6" maxlength="80" required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-block btn-hover-green" @click="postData($event)">Post Data</button>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-block btn-hover-blue" @click="putData(genre.id,$event)">Put Data</button>
+                        </div>
+                        <div class="form-group">
+                            <input type="reset" class="btn btn-block btn-hover-red" value="Limpiar">
+                        </div>
+                    </form>
+                    <div v-if="postResult " class="alert alert-secondary mt-2 " role="alert ">
+                        <pre>{{postResult}}</pre>
+                    </div>
+                    <div v-if="postResult " class="alert alert-secondary mt-2 " role="alert ">
+                        <pre>{{putResult}}</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 ">
+                <div class="table-responsive ">
+                    <table class="table table-hover table-bordered ">
+                        <thead>
+                            <tr>
+                                <th>Folio</th>
+                                <th>Descripción</th>
+                                <th colspan="2 ">Control</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(genre, index) in genres ">
+                                <td>{{genre.id}}</td>
+                                <td>{{genre.desc}}</td>
+                                <td>
+                                    <button @click="updategenre(genre.id,$event) " class="btn btn-block btn-hover-blue ">Modificar</button>
+                                </td>
+                                <td><button @click="deletegenre(genre.id,$event) " class="btn btn-block btn-hover-red ">Deshabilitar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+<script src="https://unpkg.com/vue@next "></script>
+<script src="./js/genre.js "></script>
+
+</html>
